@@ -28,7 +28,7 @@ char *_strtok(char *line, char *delim)
 	copystr = str;
 	if (*copystr == '\0')
 		return (NULL);
-	for (; *str == '\0' ; str++)
+	for (; *str != '\0' ; str++)
 	{
 		for (j = 0 ; delim[j] != '\0' ; j++)
 		{
@@ -52,7 +52,7 @@ char *_strtok(char *line, char *delim)
  */
 void tokenize(data_of_program *data)
 {
-	char *delimeter = " \t";
+	char *delimiter = " \t";
 	int i, j, counter = 2, length;
 
 	length = str_length(data->input_line);
@@ -64,24 +64,24 @@ void tokenize(data_of_program *data)
 
 	for (i = 0 ; data->input_line[i] ; i++)
 	{
-		for (j = 0 ; delimeter[j] ; j++)
+		for (j = 0 ; delimiter[j] ; j++)
 		{
-			if (data->input_line[i] == delimeter[j])
+			if (data->input_line[i] == delimiter[j])
 				counter++;
 		}
 	}
 
-	data->tokens = malloc(sizeof(char *) * (counter + 1));
+	data->tokens = malloc(sizeof(char *) * counter);
 	if (data->tokens == NULL)
 	{
 		perror(data->program_name);
 		exit(errno);
 	}
 	i = 0;
-	data->tokens[i] = str_duplicate(_strtok(data->input_line, delimeter));
-	data->command_name = (data->tokens[0]);
+	data->tokens[i] = str_duplicate(_strtok(data->input_line, delimiter));
+	data->command_name = str_duplicate(data->tokens[0]);
 	while (data->tokens[i++])
 	{
-		data->tokens[i] = str_duplicate(_strtok(NULL, delimeter));
+		data->tokens[i] = str_duplicate(_strtok(NULL, delimiter));
 	}
 }

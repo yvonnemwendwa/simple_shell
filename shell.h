@@ -62,7 +62,7 @@ typedef struct builtins
 /*========== shell.c ==========*/
 
 /* Inicialize the struct with the info of the program */
-void inicialize_data(data_of_program *data, int arc, char *argv[], char **env);
+void inicialize_data(data_of_program *data, int argc, char *argv[], char **env);
 
 /* Makes the infinite loop that shows the prompt */
 void sisifo(char *prompt, data_of_program *data);
@@ -161,7 +161,7 @@ int builtin_alias(data_of_program *data);
 /*========== builtins_env.c ==========*/
 
 /* Shows the environment where the shell runs */
-int buitin_env(data_of_program *data);
+int builtin_env(data_of_program *data);
 
 /* Create or overide a variable environment */
 int builtin_set_env(data_of_program *data);
@@ -179,7 +179,7 @@ int builtin_unset_env(data_of_program *data);
 char *env_get_key(char *name, data_of_program *data);
 
 /* Overwrite the value of the environment variable */
-int set_env_key(char *key, char *value, data_of_program *data);
+int env_set_key(char *key, char *value, data_of_program *data);
 
 /* Remove a key from the environment */
 int env_remove_key(char *key, data_of_program *data);
